@@ -32,7 +32,6 @@ typedef enum
 	IBOutlet WebView *releaseNotesView;
 	IBOutlet NSTextField *description;
 	IBOutlet NSButton *installButton;	// UK 2007-08-31.
-	IBOutlet NSButton *skipButton;
 	IBOutlet NSButton *laterButton;
 	NSProgressIndicator *releaseNotesSpinner;
 	BOOL webViewFinishedLoading;
@@ -42,7 +41,6 @@ typedef enum
 - (id)initWithAppcastItem:(SUAppcastItem *)item host:(SUHost *)host;
 
 - (IBAction)installUpdate:sender;
-- (IBAction)skipThisVersion:sender;
 - (IBAction)remindMeLater:sender;
 
 - (void)setVersionDisplayer: (id<SUVersionDisplay>)disp;

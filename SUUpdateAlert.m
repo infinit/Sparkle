@@ -80,11 +80,6 @@
 	[self endWithSelection:SUOpenInfoURLChoice];
 }
 
-- (IBAction)skipThisVersion: (id)sender
-{
-	[self endWithSelection:SUSkipThisVersionChoice];
-}
-
 - (IBAction)remindMeLater: (id)sender
 {
 	[self endWithSelection:SURemindMeLaterChoice];
@@ -202,7 +197,7 @@
 	#define DISTANCE_BETWEEN_BUTTONS		3
 	#define DISTANCE_BETWEEN_BUTTON_GROUPS	12
 	
-	CGFloat				minimumWindowWidth = [[self window] frame].size.width -NSMaxX([installButton frame]) +NSMinX([skipButton frame]);	// Distance between contents and left/right edge.
+	CGFloat				minimumWindowWidth = [[self window] frame].size.width -NSMaxX([installButton frame]) +NSMinX([laterButton frame]);	// Distance between contents and left/right edge.
 	NSDictionary*		attrs = [NSDictionary dictionaryWithObjectsAndKeys: [installButton font], NSFontAttributeName, nil];
 	NSSize				titleSize = [[installButton title] sizeWithAttributes: attrs];
 	titleSize.width += (16 + 8) * 2;	// 16 px for the end caps plus 8 px padding at each end or it'll look as ugly as calling -sizeToFit.
@@ -219,13 +214,6 @@
 	laterBtnBox.size.width = titleSize.width;
 	[laterButton setFrame: laterBtnBox];
 	minimumWindowWidth += DISTANCE_BETWEEN_BUTTONS +titleSize.width;
-	
-	titleSize = [[skipButton title] sizeWithAttributes: attrs];
-	titleSize.width += (16 + 8) * 2;	// 16 px for the end caps plus 8 px padding at each end or it'll look as ugly as calling -sizeToFit.
-	NSRect				skipBtnBox = [skipButton frame];
-	skipBtnBox.size.width = titleSize.width;
-	[skipButton setFrame: skipBtnBox];
-	minimumWindowWidth += DISTANCE_BETWEEN_BUTTON_GROUPS +titleSize.width;
 	
 	if( showReleaseNotes )	// UK 2007-09-18 (whole block)
 	{
