@@ -304,9 +304,10 @@
     static BOOL postponedOnce = NO;
     if (!postponedOnce && [[updater delegate] respondsToSelector:@selector(updater:shouldPostponeRelaunchForUpdate:untilInvoking:)])
     {
-        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[[self class] instanceMethodSignatureForSelector:@selector(installWithToolAndRelaunch:)]];
-        [invocation setSelector:@selector(installWithToolAndRelaunch:)];
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[[self class] instanceMethodSignatureForSelector:@selector(installWithToolAndRelaunch:displayingUserInterface:)]];
+        [invocation setSelector:@selector(installWithToolAndRelaunch:displayingUserInterface:)];
         [invocation setArgument:&relaunch atIndex:2];
+        [invocation setArgument:&showUI atIndex:3];
         [invocation setTarget:self];
         postponedOnce = YES;
         if ([[updater delegate] updater:updater shouldPostponeRelaunchForUpdate:updateItem untilInvoking:invocation])
