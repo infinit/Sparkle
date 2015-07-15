@@ -20,6 +20,7 @@
 #import "SUBinaryDeltaCommon.h"
 #import "SUCodeSigningVerifier.h"
 #import "SUUpdater_Private.h"
+#import "SUTaskCleanedEnvironment.h"
 
 #ifdef FINISH_INSTALL_TOOL_NAME
     // FINISH_INSTALL_TOOL_NAME expands to unquoted finish_install
@@ -352,7 +353,7 @@
     if ([[updater delegate] respondsToSelector:@selector(pathToRelaunchForUpdater:)])
         pathToRelaunch = [[updater delegate] pathToRelaunchForUpdater:updater];
     NSString *relaunchToolPath = [[relaunchPath stringByAppendingPathComponent: @"/Contents/MacOS"] stringByAppendingPathComponent: finishInstallToolName];
-    [NSTask launchedTaskWithLaunchPath: relaunchToolPath arguments:[NSArray arrayWithObjects:
+    [SUTaskCleanedEnvironment launchedTaskWithLaunchPath: relaunchToolPath arguments:[NSArray arrayWithObjects:
 																	[host bundlePath],
 																	pathToRelaunch,
 																	[NSString stringWithFormat:@"%d", [[NSProcessInfo processInfo] processIdentifier]],

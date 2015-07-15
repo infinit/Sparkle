@@ -9,6 +9,7 @@
 #import "SUPackageInstaller.h"
 #import <Cocoa/Cocoa.h>
 #import "SUConstants.h"
+#import "SUTaskCleanedEnvironment.h"
 
 NSString *SUPackageInstallerCommandKey = @"SUPackageInstallerCommand";
 NSString *SUPackageInstallerArgumentsKey = @"SUPackageInstallerArguments";
@@ -27,7 +28,7 @@ NSString *SUPackageInstallerInstallationPathKey = @"SUPackageInstallerInstallati
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
-	NSTask *installer = [NSTask launchedTaskWithLaunchPath:[info objectForKey:SUPackageInstallerCommandKey] arguments:[info objectForKey:SUPackageInstallerArgumentsKey]];
+	NSTask *installer = [SUTaskCleanedEnvironment launchedTaskWithLaunchPath:[info objectForKey:SUPackageInstallerCommandKey] arguments:[info objectForKey:SUPackageInstallerArgumentsKey]];
 	[installer waitUntilExit];
 	
 	// Known bug: if the installation fails or is canceled, Sparkle goes ahead and restarts, thinking everything is fine.

@@ -10,6 +10,7 @@
 #import "SUUnarchiver_Private.h"
 #import "NTSynchronousTask.h"
 #import "SULog.h"
+#import "SUTaskCleanedEnvironment.h"
 #include <CoreServices/CoreServices.h>
 
 @implementation SUDiskImageUnarchiver
@@ -139,7 +140,7 @@ reportError:
 
 finally:
 	if (mountedSuccessfully)
-		[NSTask launchedTaskWithLaunchPath:@"/usr/bin/hdiutil" arguments:[NSArray arrayWithObjects:@"detach", mountPoint, @"-force", nil]];
+		[SUTaskCleanedEnvironment launchedTaskWithLaunchPath:@"/usr/bin/hdiutil" arguments:[NSArray arrayWithObjects:@"detach", mountPoint, @"-force", nil]];
 	else
 		SULog(@"Can't mount DMG %@",archivePath);
 	[pool drain];
